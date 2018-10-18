@@ -1,0 +1,9 @@
+{
+    "facilities": [
+        { "id": "1", "name": "東京タワー", "opening": {"open": "9:00", "close": "22:30"}, "address": "東京都港区芝公園４丁目２−８", "postcode": "105-0011", "web_site": "https://www.tokyotower.co.jp", "description": "東京都港区芝公園にある総合電波塔の愛称である。正式名称は日本電波塔（にっぽんでんぱとう）。1958年12月23日竣工。東京のシンボル・観光名所として知られる。（出典：wikipedia）"},
+        { "id": "2", "name": "東京スカイツリー", "opening": {"open": "8:00", "close": "21:00"}, "address": "東京都墨田区押上１丁目１−２", "postcode": "131-0045", "web_site": "http://www.tokyo-skytree.jp", "description": "東京都墨田区押上一丁目にある電波塔（送信所）である。観光・商業施設やオフィスビルが併設されており、ツリーを含め周辺施設は「東京スカイツリータウン」と呼ばれる。2012年（平成24年）5月に電波塔・観光施設として開業した。（出典：wikipedia）"},
+        { "id": "3", "name": "東京ドーム", "opening": {"open": "", "close": ""}, "address": "東京都文京区後楽1-3-61", "postcode": "112-0004", "web_site": "https://www.tokyo-dome.co.jp", "description": "東京都文京区後楽一丁目にあるドーム型野球場。プロ野球・セントラル・リーグ（セ・リーグ）の読売ジャイアンツ（読売巨人軍）が専用球場（本拠地）としている。（出典：wikipedia）"},
+        { "id": "4", "name": "日本武道館", "opening": {"open": "", "close": ""}, "address": "東京都千代田区北の丸公園２番３号", "postcode": "102-8321", "web_site": "http://www.nipponbudokan.or.jp", "description": "東京都千代田区北の丸公園にある武道館。日本伝統の武道を普及奨励し、心身錬磨の大道場としての役割を担うことを設立趣旨とする。日本武道協議会加盟。武道以外の屋内競技場、多目的ホールとしても利用される。管理運営者は公益財団法人日本武道館。（出典：wikipedia）"},
+        { "id": "5", "name": "東京ディズニーリゾート", "opening": {"open": "", "close": ""}, "address": "千葉県浦安市舞浜1-1", "postcode": "279-0031", "web_site": "https://www.tokyodisneyresort.jp", "description": "日本千葉県浦安市舞浜にあるウォルト・ディズニー作品の世界観を表現したテーマパーク群である。東京ディズニーランドと東京ディズニーシーから構成され、京成グループのオリエンタルランドがフランチャイズ経営している。（出典：wikipedia）"}
+    ]
+}
