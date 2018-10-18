@@ -10,7 +10,17 @@
 ### install
 
 1. clone this repository
-2. cd [repo dir]
+
+    ```
+    git clone https://github.com/reouno/shisetsu.git
+    ```
+
+2. go to the directory
+
+    ```
+    cd shisetsu
+    ```
+
 3. install packages
 
     ```
