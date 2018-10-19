@@ -1,5 +1,6 @@
 module Msgs exposing (..)
 
+import Http
 import Models exposing (Facility, Opening)
 import Navigation exposing (Location)
 import RemoteData exposing (WebData)
@@ -13,4 +14,5 @@ type Msg
     | ChangePostCode Facility String
     | ChangeWebSite Facility String
     | ChangeDescription Facility String
---    | OnFacilitySave (Result Http.Error Facility)
+    | SaveUpdatedFacility Facility
+    | OnFacilitySave (Result Http.Error Facility)

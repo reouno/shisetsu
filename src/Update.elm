@@ -1,5 +1,6 @@
 module Update exposing (..)
 
+import Commands exposing (saveFacilityCmd)
 import Models exposing (Model, Facility)
 import Msgs exposing (Msg(..))
 import RemoteData
@@ -47,12 +48,13 @@ update msg model =
                 updatedFacility = { facility | description = newDescription }
             in
                 ( updateFacility model updatedFacility, Cmd.none )
-
-        --Msgs.ChangeOpeningTime facility ->
-        --    --let
-        --    --    updatedFacility = { facility | opening = openingTime }
-        --    --in
-        --    ( updateFacility model facility, Cmd.none)
+        Msgs.SaveUpdatedFacility facility ->
+            ( model, saveFacilityCmd facility)
+        Msgs.OnFacilitySave (Ok facility) ->
+            ( updateFacility model facility, Cmd.none )
+        Msgs.OnFacilitySave (Err error) ->
+            let _ = Debug.log "OnFacilitySave error:" error in
+            ( model, Cmd.none )
 
 updateFacility : Model -> Facility -> Model
 updateFacility model updatedFacility =
