@@ -21,7 +21,14 @@
     cd shisetsu
     ```
 
-3. install packages
+3. copy mock database to project root directory
+
+    ```
+    # under [shisetsu directory]
+    cp mock_data/db.json ./
+    ```
+
+4. install packages
 
     ```
     # install node modules with yarn or npm
@@ -30,9 +37,9 @@
     # install elm packages
     elm-package install -y
     ```
-4. run with development environment
+5. run with development environment
 
     ```
     yarn start
     ```
-5. access to [http://localhost:3000](http://localhost:3000)
+6. access to [http://localhost:3000](http://localhost:3000)
