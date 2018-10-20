@@ -1,7 +1,7 @@
 module Update exposing (..)
 
 import Commands exposing (saveFacilityCmd)
-import Models exposing (Model, Facility)
+import Models exposing (Model, Facility, FacilitySaveStatus(..))
 import Msgs exposing (Msg(..))
 import RemoteData
 import Routing exposing (parseLocation)
@@ -51,10 +51,16 @@ update msg model =
         Msgs.SaveUpdatedFacility facility ->
             ( model, saveFacilityCmd facility)
         Msgs.OnFacilitySave (Ok facility) ->
-            ( updateFacility model facility, Cmd.none )
+            let
+                modelSuccess = { model | facilitySaveStatus = Success }
+            in
+                ( updateFacility modelSuccess facility, Cmd.none )
         Msgs.OnFacilitySave (Err error) ->
-            let _ = Debug.log "OnFacilitySave error:" error in
-            ( model, Cmd.none )
+            let
+                _ = Debug.log "OnFacilitySave error:" error
+                modelFailure = { model | facilitySaveStatus = Failure }
+            in
+                ( modelFailure, Cmd.none )
 
 updateFacility : Model -> Facility -> Model
 updateFacility model updatedFacility =

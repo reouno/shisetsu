@@ -5,12 +5,14 @@ import RemoteData exposing (WebData)
 type alias Model =
     { facilities: WebData (List Facility)
     , route: Route
+    , facilitySaveStatus: FacilitySaveStatus
     }
 
 initialModel : Route -> Model
 initialModel route =
     { facilities = RemoteData.Loading
     , route = route
+    , facilitySaveStatus = NotAsked
     }
 
 type alias FacilityId =
@@ -36,3 +38,8 @@ type Route
     | FacilityRoute FacilityId
     | FacilityEditRoute FacilityId
     | NotFoundRoute
+
+type FacilitySaveStatus
+    = Success
+    | Failure
+    | NotAsked

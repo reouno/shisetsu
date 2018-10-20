@@ -3,8 +3,9 @@ module View exposing (..)
 import Facilities.List
 import Facilities.Single
 import Facilities.SingleEdit
-import Html exposing (Html, div, text)
-import Models exposing (Model, FacilityId)
+import Html exposing (Html, div, p, text)
+import Html.Attributes exposing (class)
+import Models exposing (Model, Facility, FacilityId, FacilitySaveStatus(..))
 import Msgs exposing (Msg)
 import RemoteData
 
@@ -59,11 +60,31 @@ singleEditPage model facilityId =
             in
                 case maybeFacility of
                     Just facility ->
-                        Facilities.SingleEdit.view facility
+                        viewWithSaveStatus model.facilitySaveStatus facility
                     Nothing ->
                         notFoundView "facility ID not found"
         RemoteData.Failure error ->
             text ( toString error )
+
+viewWithSaveStatus : FacilitySaveStatus -> Facility -> Html Msg
+viewWithSaveStatus status facility =
+    case status of
+        Success ->
+            div []
+                [ Facilities.SingleEdit.view facility
+                , p [ class "green" ] [ text "Save facility success!!"]
+                ]
+        Failure ->
+            div []
+                [ Facilities.SingleEdit.view facility
+                , p [ class "orange" ] [ text "Save facility failed."]
+                ]
+        NotAsked ->
+            div []
+                [ Facilities.SingleEdit.view facility
+                , p [] []
+                ]
+
 
 
 notFoundView : String -> Html Msg
