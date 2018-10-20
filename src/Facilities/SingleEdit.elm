@@ -52,7 +52,8 @@ editForm model =
                 [ text "Description: "
                 , textarea [ rows 10, cols 100, value model.description, onInput (Msgs.ChangeDescription model)] []
                 ]
-            , button [onClick (Msgs.SaveUpdatedFacility model)] [ text "Save"]
+            , button [ class "btn btn-primary mb1 bg-blue"
+                , onClick (Msgs.SaveUpdatedFacility model) ] [ text "Save"]
             ]
         ]
 

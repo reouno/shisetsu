@@ -16,6 +16,10 @@ facilityEditPath : FacilityId -> String
 facilityEditPath facilityId =
     facilityPath facilityId ++ "/edit"
 
+newFacilityPath : String
+newFacilityPath =
+    "#new-facility"
+
 matchers : Parser (Route -> a) a
 matchers =
     oneOf
@@ -23,6 +27,7 @@ matchers =
         , map FacilityEditRoute (s "facilities" </> string </> s "edit")
         , map FacilityRoute (s "facilities" </> string)
         , map FacilitiesRoute (s "facilities")
+        , map NewFacilityRoute (s "new-facility")
         ]
 
 parseLocation : Location -> Route

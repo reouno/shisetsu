@@ -1,17 +1,17 @@
 module Facilities.List exposing (..)
 
 import Html exposing (..)
-import Html.Attributes exposing (href)
+import Html.Attributes exposing (class, href)
 import Models exposing (Facility)
 import Msgs exposing (Msg)
 import RemoteData exposing (WebData)
-import Routing exposing (facilityPath)
+import Routing exposing (facilityPath, newFacilityPath)
 
 
 
 view : WebData (List Facility) -> Html Msg
 view response =
-    div []
+    div [ class "m2" ]
         [ nav
         , maybeList response
         ]
@@ -19,7 +19,10 @@ view response =
 nav : Html Msg
 nav =
     div []
-        [ div [] [ text "施設一覧" ] ]
+        [ text "Facility list"
+        , span [ class "right" ] [ newFacilityLink ]
+        ]
+
 
 maybeList : WebData (List Facility) -> Html Msg
 maybeList response =
@@ -74,3 +77,8 @@ editLink facility =
     in
         a [ href editPath ]
             [ text facility.name ]
+
+newFacilityLink : Html Msg
+newFacilityLink =
+    a [ href  newFacilityPath, class "center p1 white bg-blue rounded" ]
+        [ text "add new facility"]

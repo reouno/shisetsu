@@ -37,6 +37,7 @@ type Route
     = FacilitiesRoute
     | FacilityRoute FacilityId
     | FacilityEditRoute FacilityId
+    | NewFacilityRoute
     | NotFoundRoute
 
 type FacilitySaveStatus

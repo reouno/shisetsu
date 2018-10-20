@@ -3,6 +3,7 @@ module View exposing (..)
 import Facilities.List
 import Facilities.Single
 import Facilities.SingleEdit
+import Facilities.AddNewFacility
 import Html exposing (Html, div, p, text)
 import Html.Attributes exposing (class)
 import Models exposing (Model, Facility, FacilityId, FacilitySaveStatus(..))
@@ -23,6 +24,8 @@ page model =
             singlePage model facilityId
         Models.FacilityEditRoute facilityId ->
             singleEditPage model facilityId
+        Models.NewFacilityRoute ->
+            Facilities.AddNewFacility.view
         Models.NotFoundRoute ->
             notFoundView "url not found"
 
