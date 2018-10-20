@@ -27,7 +27,6 @@ viewFcl model =
 
 editForm : Facility -> Html Msg
 editForm model =
-    let _ = Debug.log "model:" model in
     div []
         [ div [ class "col col-8 px1"]
             [ p []
