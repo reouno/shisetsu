@@ -43,3 +43,7 @@
     yarn start
     ```
 6. access to [http://localhost:3000](http://localhost:3000)
+
+## LICENSE
+
+This software is released under MIT License, see [LICENSE](https://github.com/reouno/shisetsu/blob/add-license-1/LICENSE).
