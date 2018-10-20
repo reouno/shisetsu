@@ -1,11 +1,16 @@
 module Models exposing (..)
 
+import Random.Pcg exposing (Seed, initialSeed, step)
 import RemoteData exposing (WebData)
+import Uuid
 
 type alias Model =
     { facilities: WebData (List Facility)
     , route: Route
-    , facilitySaveStatus: FacilitySaveStatus
+    , facilitySaveStatus: RequestStatus
+    , newFacility: Facility
+    , newFacilityRegisteringStatus: RequestStatus
+    , uuidSeed: Seed
     }
 
 initialModel : Route -> Model
@@ -13,6 +18,20 @@ initialModel route =
     { facilities = RemoteData.Loading
     , route = route
     , facilitySaveStatus = NotAsked
+    , newFacility = emptyFacility
+    , newFacilityRegisteringStatus = NotAsked
+    , uuidSeed = initialSeed 1
+    }
+
+emptyFacility : Facility
+emptyFacility =
+    { id = ""
+    , name = ""
+    , opening = { open = "", close = "" }
+    , address = ""
+    , postcode = ""
+    , web_site = ""
+    , description = ""
     }
 
 type alias FacilityId =
@@ -40,7 +59,12 @@ type Route
     | NewFacilityRoute
     | NotFoundRoute
 
-type FacilitySaveStatus
+type RequestStatus
     = Success
     | Failure
     | NotAsked
+
+type alias UuidSeed =
+    { currentSeed: Seed
+    , currentUuid: Maybe Uuid.Uuid
+    }

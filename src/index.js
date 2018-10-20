@@ -9,3 +9,4 @@ var Elm = require('./Main.elm');
 var mountNode = document.getElementById('main');
 
 var app = Elm.Main.embed(mountNode);
+app.ports.randomSeed.send(Math.floor(Math.random()*0xFFFFFFFF));

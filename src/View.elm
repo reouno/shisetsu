@@ -6,7 +6,7 @@ import Facilities.SingleEdit
 import Facilities.AddNewFacility
 import Html exposing (Html, div, p, text)
 import Html.Attributes exposing (class)
-import Models exposing (Model, Facility, FacilityId, FacilitySaveStatus(..))
+import Models exposing (Model, Facility, FacilityId, RequestStatus(..))
 import Msgs exposing (Msg)
 import RemoteData
 
@@ -25,7 +25,7 @@ page model =
         Models.FacilityEditRoute facilityId ->
             singleEditPage model facilityId
         Models.NewFacilityRoute ->
-            Facilities.AddNewFacility.view
+            viewWithRequestStatus model.newFacilityRegisteringStatus Facilities.AddNewFacility.view model.newFacility
         Models.NotFoundRoute ->
             notFoundView "url not found"
 
@@ -63,28 +63,28 @@ singleEditPage model facilityId =
             in
                 case maybeFacility of
                     Just facility ->
-                        viewWithSaveStatus model.facilitySaveStatus facility
+                        viewWithRequestStatus model.facilitySaveStatus Facilities.SingleEdit.view facility
                     Nothing ->
                         notFoundView "facility ID not found"
         RemoteData.Failure error ->
             text ( toString error )
 
-viewWithSaveStatus : FacilitySaveStatus -> Facility -> Html Msg
-viewWithSaveStatus status facility =
+viewWithRequestStatus : RequestStatus -> (Facility -> Html Msg) -> Facility -> Html Msg
+viewWithRequestStatus status view facility =
     case status of
         Success ->
             div []
-                [ Facilities.SingleEdit.view facility
-                , p [ class "green" ] [ text "Save facility success!!"]
+                [ view facility
+                , p [ class "green" ] [ text "Request success!!"]
                 ]
         Failure ->
             div []
-                [ Facilities.SingleEdit.view facility
-                , p [ class "orange" ] [ text "Save facility failed."]
+                [ view facility
+                , p [ class "orange" ] [ text "Requst failure."]
                 ]
         NotAsked ->
             div []
-                [ Facilities.SingleEdit.view facility
+                [ view facility
                 , p [] []
                 ]
 

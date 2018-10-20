@@ -85,3 +85,20 @@ saveFacilityRequest facility =
 saveFacilityUrl : FacilityId -> String
 saveFacilityUrl facilityId =
     fetchFacilitiesUrl ++ "/" ++ facilityId
+
+registerNewFacilityCmd : Facility -> Cmd Msg
+registerNewFacilityCmd facility =
+    registerNerFacilityRequest facility
+        |> Http.send Msgs.OnNewFacilityRegister
+
+registerNerFacilityRequest : Facility -> Http.Request Facility
+registerNerFacilityRequest facility =
+    Http.request
+        { body = facilityEncoder facility |> Http.jsonBody
+        , expect = Http.expectJson facilityDecoder
+        , headers = []
+        , method = "POST"
+        , timeout = Nothing
+        , url = fetchFacilitiesUrl
+        , withCredentials = False
+        }
