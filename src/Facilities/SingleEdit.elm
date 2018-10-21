@@ -1,6 +1,6 @@
 module Facilities.SingleEdit exposing (..)
 
-import Html exposing (button, div, h1, Html, input, p, text, textarea)
+import Html exposing (button, div, h1, Html, input, p, span, text, textarea)
 import Html.Attributes exposing (class, cols, placeholder, name, rows, size, type_, value)
 import Html.Events exposing (onClick, onInput)
 import Models exposing (Facility)
@@ -53,10 +53,11 @@ editForm model =
                 ]
             , button [ class "btn btn-primary mb1 bg-blue"
                 , onClick (Msgs.SaveUpdatedFacility model) ] [ text "Save"]
+            , span [ class "right" ]
+                [ span [ class "m1 red" ] [ text "Caution" ]
+                , button [ class "btn btn-small white mb1 bg-red rounded"
+                         , onClick (Msgs.DeleteFacility model.id)
+                         ] [ text "Delete" ]
+                ]
             ]
         ]
-
---send : Facility -> Html Msg
---send model =
---    let
---        message = Msgs.ChangeOpenTime
