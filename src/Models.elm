@@ -1,5 +1,10 @@
 module Models exposing (..)
 
+import Material
+import Models.Facility exposing (Facility, FacilityId, Opening, emptyFacility)
+import Models.FacilityTag exposing (FacilityTag, emptyFacilityTag)
+import Models.Geolocation exposing (Geolocation, initialGeoLocation)
+import Models.Route exposing (Route)
 import Random.Pcg exposing (Seed, initialSeed, step)
 import RemoteData exposing (WebData)
 import Uuid
@@ -11,6 +16,11 @@ type alias Model =
     , newFacility: Facility
     , newFacilityRegisteringStatus: RequestStatus
     , uuidSeed: Seed
+    , mdl : Material.Model
+    , purposes: List String
+    , facilityTag: FacilityTag
+    , fetchedFacilities: WebData (List Facility)
+    , geolocation: Geolocation
     }
 
 initialModel : Route -> Model
@@ -21,43 +31,12 @@ initialModel route =
     , newFacility = emptyFacility
     , newFacilityRegisteringStatus = NotAsked
     , uuidSeed = initialSeed 1
+    , mdl = Material.model
+    , purposes = ["トイレ", "ゴミ箱", "駅", "観光", "三図河頭極楽東門蓮華台上阿弥陀坊太平埜山本実成院長福寿寺", "カフェ", "レストラン", "バー", "Tweebuffelsmeteenskootmorsdoodgeskietfontein", "居酒屋", "ジム", "ショッピング" ]
+    , facilityTag = emptyFacilityTag
+    , fetchedFacilities = RemoteData.Loading
+    , geolocation = initialGeoLocation
     }
-
-emptyFacility : Facility
-emptyFacility =
-    { id = ""
-    , name = ""
-    , opening = { open = "", close = "" }
-    , address = ""
-    , postcode = ""
-    , web_site = ""
-    , description = ""
-    }
-
-type alias FacilityId =
-    String
-
-type alias Facility =
-    { id: FacilityId
-    , name: String
-    , opening: Opening
-    , address: String
-    , postcode: String
-    , web_site: String
-    , description: String
-    }
-
-type alias Opening =
-    { open: String
-    , close: String
-    }
-
-type Route
-    = FacilitiesRoute
-    | FacilityRoute FacilityId
-    | FacilityEditRoute FacilityId
-    | NewFacilityRoute
-    | NotFoundRoute
 
 type RequestStatus
     = Success

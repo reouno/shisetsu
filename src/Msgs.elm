@@ -1,7 +1,11 @@
 module Msgs exposing (..)
 
+import Data.FacilityTagMap exposing (FacilityTagMap)
+import Geolocation as Geo
 import Http
-import Models exposing (Facility, Opening)
+import Material
+import Models.Facility exposing (Facility, FacilityId, Opening)
+import Models.FacilityTag exposing (FacilityTag)
 import Navigation exposing (Location)
 import RemoteData exposing (WebData)
 
@@ -28,3 +32,17 @@ type Msg
     | InputDescription String
     | RegisterNewFacility Facility
     | OnNewFacilityRegister (Result Http.Error Facility)
+
+-- new features for Material Design Lite
+    | Mdl (Material.Msg Msg)
+    | GoToFacilitySinglePage FacilityId
+    | FetchFacilityTag String
+    | OnFetchFacilityTag (WebData (List FacilityTag))
+    | OnSearchFacilitiesByTag (WebData (List FacilityTagMap))
+    | OnFetchFacilitiesById (WebData (List Facility))
+
+-- new features for use geolocation
+    | GetGeolocation
+    | OnGeolocationGet (Result Geo.Error Geo.Location)
+    | Geolocation Geo.Location
+    --| InitGeolocation (Geo.Result Geo.Error Geo.Location)

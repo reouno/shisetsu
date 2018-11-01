@@ -1,4 +1,4 @@
-module Facilities.List exposing (..)
+module SearchPages.SearchByTagResult exposing (..)
 
 import Html exposing (..)
 import Html.Attributes exposing (class, href)
@@ -6,25 +6,27 @@ import Material.Card as Card
 import Material.Color as Color
 import Material.Elevation as Elevation
 import Material.Grid exposing (grid, cell, offset, size, Device(..))
+import Models exposing (Model)
 import Models.Facility exposing (Facility)
 import Msgs exposing (Msg)
 import RemoteData exposing (WebData)
-import Routing exposing (facilityPath, newFacilityPath)
+import Routing exposing (facilityPath, newFacilityPath, topPagePath)
 import Styles
 
 
 
-view : WebData (List Facility) -> Html Msg
-view response =
+view : Model -> Html Msg
+view model =
     div [ class "m2" ]
         [ nav
-        , maybeList response
+        , maybeList model.fetchedFacilities
         ]
 
 nav : Html Msg
 nav =
     div []
-        [ text "Facility list"
+        [ text "Searched facility list"
+        , span [ class "left"  ] [ text topPagePath ]
         , span [ class "right" ] [ newFacilityLink ]
         ]
 

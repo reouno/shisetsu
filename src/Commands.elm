@@ -5,8 +5,11 @@ import Json.Decode as Decode
 import Json.Decode.Pipeline exposing (decode, required)
 import Json.Encode as Encode
 import Msgs exposing (Msg)
-import Models exposing (FacilityId, Facility, Opening)
+import Models.Facility exposing (FacilityId, Facility, Opening)
 import RemoteData
+
+dbRoot : String
+dbRoot = "http://localhost:4000"
 
 fetchFacilities : Cmd Msg
 fetchFacilities =
@@ -16,7 +19,7 @@ fetchFacilities =
 
 fetchFacilitiesUrl : String
 fetchFacilitiesUrl =
-    "http://localhost:4000/facilities"
+    dbRoot ++ "/facilities"
 
 facilitiesDecoder : Decode.Decoder (List Facility)
 facilitiesDecoder =
@@ -88,11 +91,11 @@ saveFacilityUrl facilityId =
 
 registerNewFacilityCmd : Facility -> Cmd Msg
 registerNewFacilityCmd facility =
-    registerNerFacilityRequest facility
+    registerNewFacilityRequest facility
         |> Http.send Msgs.OnNewFacilityRegister
 
-registerNerFacilityRequest : Facility -> Http.Request Facility
-registerNerFacilityRequest facility =
+registerNewFacilityRequest : Facility -> Http.Request Facility
+registerNewFacilityRequest facility =
     Http.request
         { body = facilityEncoder facility |> Http.jsonBody
         , expect = Http.expectJson facilityDecoder

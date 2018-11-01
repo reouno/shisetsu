@@ -3,7 +3,7 @@ module Facilities.SingleEdit exposing (..)
 import Html exposing (button, div, h1, Html, input, p, span, text, textarea)
 import Html.Attributes exposing (class, cols, placeholder, name, rows, size, type_, value)
 import Html.Events exposing (onClick, onInput)
-import Models exposing (Facility)
+import Models.Facility exposing (Facility)
 import Msgs exposing (Msg)
 
 view : Facility -> Html Msg
@@ -56,7 +56,6 @@ editForm model =
             , span [ class "right" ]
                 [ span [ class "m1 red" ] [ text "Caution" ]
                 , button [ class "btn btn-small white mb1 bg-red rounded"
-                         , onClick (Msgs.DeleteFacility model.id)
                          ] [ text "Delete" ]
                 ]
             ]

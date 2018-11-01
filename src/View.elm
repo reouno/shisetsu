@@ -6,9 +6,14 @@ import Facilities.SingleEdit
 import Facilities.AddNewFacility
 import Html exposing (Html, div, p, text)
 import Html.Attributes exposing (class)
-import Models exposing (Model, Facility, FacilityId, RequestStatus(..))
+import Models exposing (Model, RequestStatus(..))
+import Models.Facility exposing (Facility, FacilityId)
+import Models.Route exposing (Route(..))
 import Msgs exposing (Msg)
+import Pages.GetGeolocation as GetGeolocation
 import RemoteData
+import SearchPages.Top as Top
+import SearchPages.SearchByTagResult as SearchByTagResult
 
 view : Model -> Html Msg
 view model =
@@ -18,15 +23,21 @@ view model =
 page : Model -> Html Msg
 page model =
     case model.route of
-        Models.FacilitiesRoute ->
+        TopRoute ->
+            Top.view model
+        FacilitiesRoute ->
             Facilities.List.view model.facilities
-        Models.FacilityRoute facilityId ->
+        FacilityRoute facilityId ->
             singlePage model facilityId
-        Models.FacilityEditRoute facilityId ->
+        FacilityEditRoute facilityId ->
             singleEditPage model facilityId
-        Models.NewFacilityRoute ->
+        NewFacilityRoute ->
             viewWithRequestStatus model.newFacilityRegisteringStatus Facilities.AddNewFacility.view model.newFacility
-        Models.NotFoundRoute ->
+        SearchedByTagRoute _ ->
+            SearchByTagResult.view model
+        GetGeolocationRoute ->
+            GetGeolocation.view model
+        NotFoundRoute ->
             notFoundView "url not found"
 
 singlePage : Model -> FacilityId -> Html Msg

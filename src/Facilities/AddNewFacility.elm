@@ -4,7 +4,7 @@ import Html exposing (Html, button, div, input, table, tbody, td, text, textarea
 import Html.Attributes exposing (class, cols, placeholder, rows, type_, value)
 import Html.Events exposing (onClick, onInput)
 import Msgs exposing (Msg)
-import Models exposing (Facility)
+import Models.Facility exposing (Facility)
 
 view : Facility -> Html Msg
 view newFacility =

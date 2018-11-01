@@ -2,7 +2,7 @@ module Facilities.Single exposing (..)
 
 import Html exposing (a, div, h1, Html, p, text)
 import Html.Attributes exposing (class, href)
-import Models exposing (Facility)
+import Models.Facility exposing (Facility)
 import Msgs exposing (Msg)
 import Routing exposing (facilityEditPath)
 

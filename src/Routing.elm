@@ -1,8 +1,12 @@
 module Routing exposing (..)
 
-import Models exposing (FacilityId, Route(..))
+import Models.Facility exposing (FacilityId)
+import Models.Route exposing (Route(..))
 import Navigation exposing (Location)
 import UrlParser exposing (map, oneOf, parseHash, Parser, s, string, top, (</>))
+
+topPagePath : String
+topPagePath = "/"
 
 facilitiesPath : String
 facilitiesPath =
@@ -23,11 +27,13 @@ newFacilityPath =
 matchers : Parser (Route -> a) a
 matchers =
     oneOf
-        [ map FacilitiesRoute top
+        [ map TopRoute top
         , map FacilityEditRoute (s "facilities" </> string </> s "edit")
         , map FacilityRoute (s "facilities" </> string)
         , map FacilitiesRoute (s "facilities")
         , map NewFacilityRoute (s "new-facility")
+        , map SearchedByTagRoute (s "search" </> string)
+        , map GetGeolocationRoute (s "geolocation")
         ]
 
 parseLocation : Location -> Route
@@ -37,3 +43,7 @@ parseLocation location =
             route
         Nothing ->
             NotFoundRoute
+
+searchPath : String -> String
+searchPath keyWord =
+    "#search/" ++ keyWord
